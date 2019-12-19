@@ -39,7 +39,8 @@
 		3A35D3C723ABAE4A0047C528 = {
 			isa = PBXGroup;
 			children = (
-				3A35D3D223ABAE4A0047C528 /* Xcode Progress */,
+				3A35D3D223ABAE4A0047C528 /* Sources */,
+				3A35D3E623ABAE5D0047C528 /* Resources */,
 				3A35D3D123ABAE4A0047C528 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,18 +53,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3A35D3D223ABAE4A0047C528 /* Xcode Progress */ = {
+		3A35D3D223ABAE4A0047C528 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				3A35D3D323ABAE4A0047C528 /* AppDelegate.swift */,
 				3A35D3D523ABAE4A0047C528 /* ContentView.swift */,
-				3A35D3D723ABAE4B0047C528 /* Assets.xcassets */,
-				3A35D3DC23ABAE4B0047C528 /* Main.storyboard */,
-				3A35D3DF23ABAE4B0047C528 /* Info.plist */,
-				3A35D3E023ABAE4B0047C528 /* Xcode_Progress.entitlements */,
-				3A35D3D923ABAE4B0047C528 /* Preview Content */,
 			);
-			path = "Xcode Progress";
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		3A35D3D923ABAE4B0047C528 /* Preview Content */ = {
@@ -72,6 +68,18 @@
 				3A35D3DA23ABAE4B0047C528 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3A35D3E623ABAE5D0047C528 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3A35D3D723ABAE4B0047C528 /* Assets.xcassets */,
+				3A35D3DC23ABAE4B0047C528 /* Main.storyboard */,
+				3A35D3DF23ABAE4B0047C528 /* Info.plist */,
+				3A35D3E023ABAE4B0047C528 /* Xcode_Progress.entitlements */,
+				3A35D3D923ABAE4B0047C528 /* Preview Content */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,11 +292,11 @@
 				CODE_SIGN_ENTITLEMENTS = "Xcode Progress/Xcode_Progress.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Xcode Progress/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Xcode Progress/Info.plist";
+				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -307,11 +315,11 @@
 				CODE_SIGN_ENTITLEMENTS = "Xcode Progress/Xcode_Progress.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Xcode Progress/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Xcode Progress/Info.plist";
+				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
