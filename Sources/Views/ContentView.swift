@@ -12,14 +12,19 @@ import RenderKit
 struct ContentView: View {
     @EnvironmentObject var main: Main
     var body: some View {
-        VStack {
-            Spacer()
-            Text(main.activeWindowName ?? "")
+        VStack(spacing: 10) {
+//            Text(main.activeWindowName ?? "")
             NODERepView(node: main.finalPix)
-                .aspectRatio(CGSize(width: 1024, height: 44), contentMode: .fit)
+                .frame(width: Main.infoFrame.width, height: Main.infoFrame.height)
+//                .aspectRatio(CGSize(width: 1024, height: 44), contentMode: .fit)
                 .opacity(main.activeWindowFrame != nil ? 1.0 : 0.0)
             Spacer()
+            if main.progress != nil {
+                ProgressCircleView(fraction: Binding<CGFloat>(get: { self.main.progress! }, set: { _ in }))                
+            }
+            Spacer()
         }
+            .padding()
     }
 }
 

@@ -13,6 +13,7 @@
 		3A35D3DB23ABAE4B0047C528 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A35D3DA23ABAE4B0047C528 /* Preview Assets.xcassets */; };
 		3A35D3DE23ABAE4B0047C528 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A35D3DC23ABAE4B0047C528 /* Main.storyboard */; };
 		3A35D3EA23ABAED20047C528 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35D3E923ABAED20047C528 /* Main.swift */; };
+		3AEB169F23ABC4A700E3D506 /* ProgressCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB169E23ABC4A700E3D506 /* ProgressCircleView.swift */; };
 		C161A7387377E3A7538CA233 /* Pods_Xcode_Progress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FFE7712C92F64F8549843CA /* Pods_Xcode_Progress.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		3A35D3DF23ABAE4B0047C528 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A35D3E023ABAE4B0047C528 /* Xcode_Progress.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Xcode_Progress.entitlements; sourceTree = "<group>"; };
 		3A35D3E923ABAED20047C528 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		3AEB169E23ABC4A700E3D506 /* ProgressCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircleView.swift; sourceTree = "<group>"; };
 		7626A353C5B22E1C87C06980 /* Pods-Xcode Progress.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xcode Progress.debug.xcconfig"; path = "Target Support Files/Pods-Xcode Progress/Pods-Xcode Progress.debug.xcconfig"; sourceTree = "<group>"; };
 		BE8BE3FE0D31BB9C7B320F67 /* Pods-Xcode Progress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xcode Progress.release.xcconfig"; path = "Target Support Files/Pods-Xcode Progress/Pods-Xcode Progress.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				3A35D3D523ABAE4A0047C528 /* ContentView.swift */,
+				3AEB169E23ABC4A700E3D506 /* ProgressCircleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A35D3D623ABAE4A0047C528 /* ContentView.swift in Sources */,
+				3AEB169F23ABC4A700E3D506 /* ProgressCircleView.swift in Sources */,
 				3A35D3D423ABAE4A0047C528 /* AppDelegate.swift in Sources */,
 				3A35D3EA23ABAED20047C528 /* Main.swift in Sources */,
 			);
