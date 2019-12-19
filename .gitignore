@@ -3,8 +3,6 @@
 xcuserdata/
 xcshareddata/
 
-Assets/*
-
 Podfile.lock
 Pods/*
 *.xcworkspace
