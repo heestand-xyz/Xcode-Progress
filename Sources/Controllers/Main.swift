@@ -10,20 +10,27 @@ import Foundation
 import LiveValues
 import RenderKit
 import PixelKit
+import SwiftUI
 
 class Main: ObservableObject, NODEDelegate {
     
     static let infoFrame: CGRect = CGRect(x: 0, y: 8, width: 512, height: 22)
+    static let alertWarningColor: LiveColor = LiveColor(hex: "f6c644")
+    static let alertWarningDimColor: LiveColor = LiveColor(hex: "a18841")
+    static let alertErrorColor: LiveColor = LiveColor(hex: "ce3227")
+    static let alertErrorDimColor: LiveColor = LiveColor(hex: "8c3632")
     
     @Published var progress: CGFloat?
+    @Published var hasWarning: Bool?
+    @Published var hasError: Bool?
  
     var screenCapturePix: ScreenCapturePIX!
-    var cropPix: CropPIX!
+    var infoPix: CropPIX!
     var progressPix: CropPIX!
+    var alertPix: CropPIX!
     var finalPix: PIX!
     
     @Published var activeWindowFrame: CGRect?
-//    @Published var activeWindowName: String?
     struct Window: Equatable {
         let name: String
         let frame: CGRect
@@ -39,23 +46,22 @@ class Main: ObservableObject, NODEDelegate {
     
     func setupPixs() {
         screenCapturePix = ScreenCapturePIX()
-        cropPix = CropPIX()
-        cropPix.input = screenCapturePix
+        infoPix = CropPIX()
+        infoPix.input = screenCapturePix
         progressPix = CropPIX()
         progressPix.input = screenCapturePix
         progressPix.delegate = self
-        finalPix = cropPix
+        alertPix = CropPIX()
+        alertPix.input = screenCapturePix
+        alertPix.delegate = self
+        finalPix = infoPix
     }
     
     func frameLoop() {
         if let window = windows().first {
             if self.currentWindow != window {
-//                if activeWindowName != window.name {
-//                    activeWindowName = window.name
-//                }
                 if activeWindowFrame != window.frame {
-                    self.activeWindowFrame = nil
-                    self.progress = nil
+                    clear()
                     windowMoveTimer?.invalidate()
                     windowMoveTimer = Timer(timeInterval: 0.1, repeats: false, block: { _ in
                         guard let windowFrame = self.currentWindow?.frame else { return }
@@ -69,25 +75,58 @@ class Main: ObservableObject, NODEDelegate {
         }
     }
     
+    func clear() {
+        self.activeWindowFrame = nil
+        self.progress = nil
+        self.hasWarning = nil
+        self.hasError = nil
+    }
+    
     func nodeDidRender(_ node: NODE) {
-        guard node.id == progressPix.id else { return }
         guard activeWindowFrame != nil else { return }
-        guard let pixels: PIX.PixelPack = progressPix.renderedPixels else {
-            progress = nil
-            return
-        }
-        let width: Int = pixels.resolution.w
-        var index: Int = 0
-        for (i, pixel) in pixels.raw[0].enumerated() {
-            if pixel.color.sat.cg > 0.5 {
-                index = i
-            } else {
-                break
+        if node.id == progressPix.id {
+            
+            guard let pixels: PIX.PixelPack = progressPix.renderedPixels else {
+                progress = nil
+                return
             }
+            
+            let width: Int = pixels.resolution.w
+            var index: Int = 0
+            for (i, pixel) in pixels.raw[0].enumerated() {
+                if pixel.color.sat.cg > 0.5 {
+                    index = i
+                } else {
+                    break
+                }
+            }
+            
+            let fraction: CGFloat = CGFloat(index) / CGFloat(width - 1)
+            progress = fraction
+            
+        } else if node.id == alertPix.id {
+            
+            guard let pixels: PIX.PixelPack = alertPix.renderedPixels else {
+                hasWarning = nil
+                hasError = nil
+                return
+            }
+            
+            var hasWarning: Bool = false
+            var hasError: Bool = false
+            for pixel in pixels.raw[0] {
+                let dist: LiveFloat = 0.25
+                if (pixel.color.similar(to: Main.alertWarningColor, by: dist) ||
+                    pixel.color.similar(to: Main.alertWarningDimColor, by: dist)).val {
+                    hasWarning = true
+                } else if (pixel.color.similar(to: Main.alertErrorColor, by: dist) ||
+                           pixel.color.similar(to: Main.alertErrorDimColor, by: dist)).val {
+                    hasError = true
+                }
+            }
+            self.hasWarning = hasWarning
+            self.hasError = hasError
         }
-        let fraction: CGFloat = CGFloat(index) / CGFloat(width - 1)
-        print(index, width, fraction)
-        progress = fraction
     }
     
     func crop(with windowFrame: CGRect) {
@@ -98,14 +137,17 @@ class Main: ObservableObject, NODEDelegate {
         let cropFrame: CGRect = CGRect(x: x, y: Main.infoFrame.minY, width: Main.infoFrame.width, height: Main.infoFrame.height)
         let infoFrame: CGRect = crop(frame: windowFrame, with: cropFrame)
         let uvFrame: CGRect = getUVFrame(from: infoFrame, in: screen)
-        cropPix.cropFrame = uvFrame
+        infoPix.cropFrame = uvFrame
 
         let cropProgressFrame: CGRect = CGRect(x: x + 1, y: cropFrame.minY + cropFrame.height - 2, width: cropFrame.width - 2, height: 1)
         let progressFrame: CGRect = crop(frame: windowFrame, with: cropProgressFrame)
-        let uvProgessFrame: CGRect = getUVFrame(from: progressFrame, in: screen)
-        progressPix.cropFrame = uvProgessFrame
-        
-        print("Cropped from \(windowFrame)")
+        let uvProgressFrame: CGRect = getUVFrame(from: progressFrame, in: screen)
+        progressPix.cropFrame = uvProgressFrame
+
+        let cropAlertFrame: CGRect = CGRect(x: cropFrame.maxX - 100, y: cropFrame.minY + cropFrame.height / 2, width: 100, height: 1)
+        let alertFrame: CGRect = crop(frame: windowFrame, with: cropAlertFrame)
+        let uvAlertFrame: CGRect = getUVFrame(from: alertFrame, in: screen)
+        alertPix.cropFrame = uvAlertFrame
         
     }
     
