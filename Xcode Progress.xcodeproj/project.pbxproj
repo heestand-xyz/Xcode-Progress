@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,9 +12,12 @@
 		3A35D3D823ABAE4B0047C528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A35D3D723ABAE4B0047C528 /* Assets.xcassets */; };
 		3A35D3DB23ABAE4B0047C528 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A35D3DA23ABAE4B0047C528 /* Preview Assets.xcassets */; };
 		3A35D3DE23ABAE4B0047C528 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A35D3DC23ABAE4B0047C528 /* Main.storyboard */; };
+		3A35D3EA23ABAED20047C528 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35D3E923ABAED20047C528 /* Main.swift */; };
+		C161A7387377E3A7538CA233 /* Pods_Xcode_Progress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FFE7712C92F64F8549843CA /* Pods_Xcode_Progress.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2FFE7712C92F64F8549843CA /* Pods_Xcode_Progress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xcode_Progress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A35D3D023ABAE4A0047C528 /* Xcode Progress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Xcode Progress.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A35D3D323ABAE4A0047C528 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A35D3D523ABAE4A0047C528 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -23,6 +26,9 @@
 		3A35D3DD23ABAE4B0047C528 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A35D3DF23ABAE4B0047C528 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A35D3E023ABAE4B0047C528 /* Xcode_Progress.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Xcode_Progress.entitlements; sourceTree = "<group>"; };
+		3A35D3E923ABAED20047C528 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		7626A353C5B22E1C87C06980 /* Pods-Xcode Progress.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xcode Progress.debug.xcconfig"; path = "Target Support Files/Pods-Xcode Progress/Pods-Xcode Progress.debug.xcconfig"; sourceTree = "<group>"; };
+		BE8BE3FE0D31BB9C7B320F67 /* Pods-Xcode Progress.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xcode Progress.release.xcconfig"; path = "Target Support Files/Pods-Xcode Progress/Pods-Xcode Progress.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C161A7387377E3A7538CA233 /* Pods_Xcode_Progress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 				3A35D3D223ABAE4A0047C528 /* Sources */,
 				3A35D3E623ABAE5D0047C528 /* Resources */,
 				3A35D3D123ABAE4A0047C528 /* Products */,
+				6E7B07ACA3DC42A2326CA4AC /* Pods */,
+				BBFCC0530DDA45108E55D9CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,7 +66,8 @@
 			isa = PBXGroup;
 			children = (
 				3A35D3D323ABAE4A0047C528 /* AppDelegate.swift */,
-				3A35D3D523ABAE4A0047C528 /* ContentView.swift */,
+				3A35D3E723ABAEBC0047C528 /* Views */,
+				3A35D3E823ABAEC20047C528 /* Controllers */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -82,6 +92,39 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		3A35D3E723ABAEBC0047C528 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A35D3D523ABAE4A0047C528 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A35D3E823ABAEC20047C528 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A35D3E923ABAED20047C528 /* Main.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6E7B07ACA3DC42A2326CA4AC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7626A353C5B22E1C87C06980 /* Pods-Xcode Progress.debug.xcconfig */,
+				BE8BE3FE0D31BB9C7B320F67 /* Pods-Xcode Progress.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BBFCC0530DDA45108E55D9CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2FFE7712C92F64F8549843CA /* Pods_Xcode_Progress.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,9 +132,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A35D3E323ABAE4B0047C528 /* Build configuration list for PBXNativeTarget "Xcode Progress" */;
 			buildPhases = (
+				E9292C476FB9A4CBD8888F82 /* [CP] Check Pods Manifest.lock */,
 				3A35D3CC23ABAE4A0047C528 /* Sources */,
 				3A35D3CD23ABAE4A0047C528 /* Frameworks */,
 				3A35D3CE23ABAE4A0047C528 /* Resources */,
+				E89AD4AE9265A6C6C651DEC6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -148,6 +193,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E89AD4AE9265A6C6C651DEC6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Xcode Progress/Pods-Xcode Progress-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Xcode Progress/Pods-Xcode Progress-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Xcode Progress/Pods-Xcode Progress-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9292C476FB9A4CBD8888F82 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Xcode Progress-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3A35D3CC23ABAE4A0047C528 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -155,6 +242,7 @@
 			files = (
 				3A35D3D623ABAE4A0047C528 /* ContentView.swift in Sources */,
 				3A35D3D423ABAE4A0047C528 /* AppDelegate.swift in Sources */,
+				3A35D3EA23ABAED20047C528 /* Main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,9 +375,10 @@
 		};
 		3A35D3E423ABAE4B0047C528 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7626A353C5B22E1C87C06980 /* Pods-Xcode Progress.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Xcode Progress/Xcode_Progress.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Resources/Xcode_Progress.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Resources/Preview Content\"";
@@ -310,9 +399,10 @@
 		};
 		3A35D3E523ABAE4B0047C528 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE8BE3FE0D31BB9C7B320F67 /* Pods-Xcode Progress.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Xcode Progress/Xcode_Progress.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Resources/Xcode_Progress.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Resources/Preview Content\"";
