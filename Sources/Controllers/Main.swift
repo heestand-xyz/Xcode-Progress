@@ -116,11 +116,11 @@ class Main: ObservableObject, NODEDelegate {
             var hasError: Bool = false
             for pixel in pixels.raw[0] {
                 let dist: LiveFloat = 0.25
-                if (pixel.color.similar(to: Main.alertWarningColor, by: dist) ||
-                    pixel.color.similar(to: Main.alertWarningDimColor, by: dist)).val {
+                if (similar(a: pixel.color, b: Main.alertWarningColor, by: dist) ||
+                    similar(a: pixel.color, b: Main.alertWarningDimColor, by: dist)).val {
                     hasWarning = true
-                } else if (pixel.color.similar(to: Main.alertErrorColor, by: dist) ||
-                           pixel.color.similar(to: Main.alertErrorDimColor, by: dist)).val {
+                } else if (similar(a: pixel.color, b: Main.alertErrorColor, by: dist) ||
+                    similar(a: pixel.color, b: Main.alertErrorDimColor, by: dist)).val {
                     hasError = true
                 }
             }
@@ -201,6 +201,20 @@ class Main: ObservableObject, NODEDelegate {
 
         return windows
 
+    }
+    
+    func similar(a colorA: LiveColor, b colorB: LiveColor, by value: LiveFloat) -> LiveBool {
+        let rDiff: LiveFloat = colorA.r - colorB.r
+        let gDiff: LiveFloat = colorA.g - colorB.g
+        let bDiff: LiveFloat = colorA.b - colorB.b
+        let aDiff: LiveFloat = colorA.a - colorB.a
+        func getDist(_ a: LiveFloat, _ b: LiveFloat) -> LiveFloat {
+            sqrt(pow(a, 2) + pow(b, 2))
+        }
+        let rgDiff: LiveFloat = getDist(rDiff, gDiff)
+        let rgbDiff: LiveFloat = getDist(rgDiff, bDiff)
+        let rgbaDiff: LiveFloat = getDist(rgbDiff, aDiff)
+        return rgbaDiff < value
     }
     
 }
