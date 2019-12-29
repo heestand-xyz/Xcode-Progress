@@ -23,10 +23,14 @@ class Main: ObservableObject, NODEDelegate {
     @Published var progress: CGFloat?
     @Published var hasWarning: Bool?
     @Published var hasError: Bool?
+    
+    var ocrInProgress: Bool = false
+    @Published var infoText: String?
  
     var screenCapturePix: ScreenCapturePIX!
     var infoPix: CropPIX!
     var progressPix: CropPIX!
+    var textPix: CropPIX!
     var alertPix: CropPIX!
     var finalPix: PIX!
     
@@ -39,7 +43,10 @@ class Main: ObservableObject, NODEDelegate {
     var windowMoveTimer: Timer?
     var lastFrame: CGRect?
     
+    let ocr: SLTesseract
+    
     init() {
+        ocr = SLTesseract()
         setupPixs()
         PixelKit.main.render.listenToFrames(callback: frameLoop)
     }
@@ -51,6 +58,9 @@ class Main: ObservableObject, NODEDelegate {
         progressPix = CropPIX()
         progressPix.input = screenCapturePix
         progressPix.delegate = self
+        textPix = CropPIX()
+        textPix.input = screenCapturePix
+        textPix.delegate = self
         alertPix = CropPIX()
         alertPix.input = screenCapturePix
         alertPix.delegate = self
@@ -76,10 +86,11 @@ class Main: ObservableObject, NODEDelegate {
     }
     
     func clear() {
-        self.activeWindowFrame = nil
-        self.progress = nil
-        self.hasWarning = nil
-        self.hasError = nil
+        activeWindowFrame = nil
+        progress = nil
+        hasWarning = nil
+        hasError = nil
+        infoText = nil
     }
     
     func nodeDidRender(_ node: NODE) {
@@ -103,6 +114,24 @@ class Main: ObservableObject, NODEDelegate {
             
             let fraction: CGFloat = CGFloat(index) / CGFloat(width - 1)
             progress = fraction
+         
+        } else if node.id == textPix.id {
+            
+            guard !ocrInProgress else { return }
+            
+            guard let image: NSImage = textPix.renderedImage else {
+                infoText = nil
+                return
+            }
+            
+            ocrInProgress = true
+            DispatchQueue.global(qos: .background).async {
+                let text = self.ocr.recognize(image)
+                DispatchQueue.main.async {
+                    self.infoText = text
+                    self.ocrInProgress = false
+                }
+            }
             
         } else if node.id == alertPix.id {
             
@@ -144,6 +173,11 @@ class Main: ObservableObject, NODEDelegate {
         let uvProgressFrame: CGRect = getUVFrame(from: progressFrame, in: screen)
         progressPix.cropFrame = uvProgressFrame
 
+        let cropTextFrame: CGRect = CGRect(x: x + 5, y: cropFrame.minY + 3, width: cropFrame.width - 95, height: cropFrame.height - 6)
+        let textFrame: CGRect = crop(frame: windowFrame, with: cropTextFrame)
+        let uvTextFrame: CGRect = getUVFrame(from: textFrame, in: screen)
+        textPix.cropFrame = uvTextFrame
+
         let cropAlertFrame: CGRect = CGRect(x: cropFrame.maxX - 100, y: cropFrame.minY + cropFrame.height / 2, width: 100, height: 1)
         let alertFrame: CGRect = crop(frame: windowFrame, with: cropAlertFrame)
         let uvAlertFrame: CGRect = getUVFrame(from: alertFrame, in: screen)
@@ -168,6 +202,8 @@ class Main: ObservableObject, NODEDelegate {
     }
     
     func windows() -> [Window] {
+        
+        print(">>>")
 
         var windows: [Window] = []
         
@@ -192,8 +228,14 @@ class Main: ObservableObject, NODEDelegate {
 
             let frame: CGRect = CGRect(x: x, y: y, width: w, height: h)
             
+            print(frame)
+            
             /// Block Popups
             guard frame.size.width > 300 && frame.size.height > 300 else { continue }
+            
+//            /// Block non main screen
+//            guard let windowFrame = NSScreen.main?.frame else { continue }
+//            guard windowFrame.contains(CGPoint(x: frame.midX, y: frame.midY)) else { continue }
             
             windows.append(Window(name: name, frame: frame))
 

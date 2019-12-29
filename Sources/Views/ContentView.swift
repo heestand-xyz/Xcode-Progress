@@ -16,9 +16,33 @@ struct ContentView: View {
             NODERepView(node: main.finalPix)
                 .frame(width: Main.infoFrame.width, height: Main.infoFrame.height)
                 .opacity(main.activeWindowFrame != nil ? 1.0 : 0.0)
+            GeometryReader { geo in
+                HStack {
+                    Spacer()
+                    Text(self.main.infoText ?? "")
+                        .font(.system(size: geo.size.width / 50, weight: .regular, design: .monospaced))
+                    Spacer()
+                }
+                    .layoutPriority(-1)
+            }
+                .frame(height: 100)
             Spacer()
-            if main.progress != nil {
-                ProgressCircleView(fraction: Binding<CGFloat>(get: { self.main.progress! }, set: { _ in }))                
+            ZStack {
+                Circle()
+                    .foregroundColor({
+                        if self.main.infoText != nil && main.progress == 0.0 {
+                            if self.main.infoText!.contains("Failed") {
+                                return .red
+                            } else if self.main.infoText!.contains("Succeeded") {
+                                return .green
+                            }
+                        }
+                        return .clear
+                    }())
+                    .aspectRatio(1.0, contentMode: .fit)
+                if main.progress != nil {
+                    ProgressCircleView(fraction: Binding<CGFloat>(get: { self.main.progress! }, set: { _ in }))
+                }
             }
             Spacer()
             HStack {
